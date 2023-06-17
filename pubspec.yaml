@@ -3,8 +3,8 @@ description: Designed to simplify testing of SuperControllers, RxNotifiers and R
 version: 1.0.0
 repository: https://github.com/DrDejaVuNG/super_test
 issue_tracker: https://github.com/DrDejaVuNG/super_test/issues
-homepage: https://drdejavu.dev
-documentation: https://super.drdejavu.dev
+homepage: https://drdejavu.ng
+documentation: https://super.drdejavu.ng
 
 # publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
