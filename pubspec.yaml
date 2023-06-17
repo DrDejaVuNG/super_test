@@ -6,7 +6,7 @@ issue_tracker: https://github.com/DrDejaVuNG/super_test/issues
 homepage: https://drdejavu.dev
 documentation: https://super.drdejavu.dev
 
-# publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
   sdk: ^3.0.3
@@ -15,6 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_super:
+    path: ../flutter_super
   meta:
   test:
   diff_match_patch:
