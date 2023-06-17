@@ -6,7 +6,7 @@
 
 # Super Test
 
-Designed to simplify testing of SuperControllers, RxNotifiers and RxTs. Designed for the [flutter_super](https://pub.dev/packages/flutter_super) package.
+Designed to simplify testing of SuperControllers, RxNotifiers and RxTs. Developed for the [flutter_super](https://pub.dev/packages/flutter_super) package.
 
 ---
 
