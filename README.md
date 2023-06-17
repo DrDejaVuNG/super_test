@@ -4,6 +4,8 @@
 
 ---
 
+# Super Test
+
 Developed to simplify testing of SuperControllers, RxNotifiers and RxTs. Designed for the [flutter_super](https://pub.dev/packages/flutter_super) package.
 
 ---
