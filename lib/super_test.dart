@@ -1,4 +1,4 @@
-/// Developed to simplify testing of SuperControllers, 
+/// Developed to simplify testing of SuperControllers,
 /// RxNotifiers and RxTs.
 library super_test;
 

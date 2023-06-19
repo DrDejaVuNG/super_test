@@ -1,3 +1,3 @@
 ## 1.0.0
 
-- Initial version.
+- Stable release of super_test.
