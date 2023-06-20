@@ -9,13 +9,13 @@ issue_tracker: https://github.com/DrDejaVuNG/super_test/issues
 # publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: ^3.0.3
+  sdk: ^3.0.0
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_super:  ^1.0.1
-  meta: ^1.9.1
+  meta: ^1.9.1 
   test: ^1.24.3
   diff_match_patch: ^0.4.1
 
