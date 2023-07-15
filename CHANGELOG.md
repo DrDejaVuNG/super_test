@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Minor corrections
+
 ## 1.0.5
 
 - Switch flutter_super dependency to dart_super
