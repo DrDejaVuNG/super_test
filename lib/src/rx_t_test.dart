@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_super/flutter_super.dart';
+import 'package:dart_super/dart_super.dart';
 import 'package:meta/meta.dart';
 import 'package:super_test/src/core.dart';
 import 'package:test/test.dart' as test;
@@ -129,10 +129,10 @@ Future<void> _rxtTest<T>({
       final rx = build;
       var changes = 0;
 
-      if (seed != null) rx.value = seed;
+      if (seed != null) rx.state = seed;
       rx.addListener(() {
         if (skip == 0 || changes == skip) {
-          states.add(rx.value);
+          states.add(rx.state);
         }
         changes++;
       });

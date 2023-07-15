@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Switch flutter_super dependency to dart_super
+
 ## 1.0.2
 
 - Downgraded test dependency version to make it compatible with flutter test

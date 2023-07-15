@@ -1,6 +1,6 @@
 name: super_test
 description: Designed to simplify testing of SuperControllers, RxNotifiers and RxTs.
-version: 1.0.2
+version: 1.0.5
 repository: https://github.com/DrDejaVuNG/super_test
 issue_tracker: https://github.com/DrDejaVuNG/super_test/issues
 # homepage: https://drdejavu.ng
@@ -14,7 +14,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_super: ^1.1.2
+  dart_super: ^1.3.2
   meta: ^1.9.1 
   test: ^1.16.0
   diff_match_patch: ^0.4.1

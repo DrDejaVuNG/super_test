@@ -1,4 +1,4 @@
-import 'package:flutter_super/flutter_super.dart';
+import 'package:dart_super/dart_super.dart';
 import 'package:super_test/super_test.dart';
 
 class CounterNotifier extends RxNotifier<int> {
@@ -15,10 +15,10 @@ class CounterNotifier extends RxNotifier<int> {
 class CounterController extends SuperController {
   final _count = 0.rx; // RxInt(0);
 
-  int get count => _count.value;
+  int get count => _count.state;
 
   void increment() {
-    _count.value++;
+    _count.state++;
   }
 
   @override
@@ -35,9 +35,9 @@ void main() {
     build: CounterController(),
     state: (controller) => controller.count,
     act: (controller) async {
-      controller._count.value++;
+      controller._count.state++;
       await Future<void>.delayed(const Duration(milliseconds: 10));
-      controller._count.value++;
+      controller._count.state++;
     },
     expect: const <int>[1, 2],
   );
@@ -46,8 +46,8 @@ void main() {
     'Outputs [2] when the increment method is called twice and skip: 1, 3',
     build: 0.rx,
     act: (rx) {
-      rx.value++;
-      rx.value++;
+      rx.state++;
+      rx.state++;
     },
     skip: 1,
     expect: const <int>[2],
@@ -57,7 +57,7 @@ void main() {
     'Outputs [11] when the increment method is called and seed 10',
     build: 0.rx,
     seed: 10,
-    act: (rx) => rx.value++,
+    act: (rx) => rx.state++,
     expect: const <int>[11],
   );
 

@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:flutter_super/flutter_super.dart';
+import 'package:dart_super/dart_super.dart';
 import 'package:meta/meta.dart';
 import 'package:super_test/src/core.dart';
 import 'package:test/test.dart' as test;
@@ -139,10 +139,10 @@ Future<void> _controllerTest<S extends SuperController, T>({
       var changes = 0;
 
       if (rx is RxT<T>) {
-        if (seed != null) rx.value = seed;
+        if (seed != null) rx.state = seed;
         rx.addListener(() {
           if (skip == 0 || changes == skip) {
-            states.add(rx.value);
+            states.add(rx.state);
           }
           changes++;
         });

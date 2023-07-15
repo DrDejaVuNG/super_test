@@ -1,4 +1,4 @@
-import 'package:flutter_super/flutter_super.dart';
+import 'package:dart_super/dart_super.dart';
 import 'package:super_test/super_test.dart';
 
 class CounterNotifier extends RxNotifier<int> {
