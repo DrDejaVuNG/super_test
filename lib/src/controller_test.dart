@@ -19,7 +19,7 @@ import 'package:test/test.dart' as test;
 /// ```dart
 /// testController<MyController, int>(
 ///   'MyController test',
-///   build: MyController(),
+///   build: () => MyController(),
 ///   state: (controller) => controller.myState,
 ///   onEnable: () {
 ///     // Handle the enable state.
@@ -33,12 +33,12 @@ import 'package:test/test.dart' as test;
 ///   setUp: () {
 ///     // Perform setup operations.
 ///   },
-///   seed: 10,
+///   seed: () => 10,
 ///   act: (controller) async {
 ///     // Perform actions on the controller.
 ///   },
 ///   wait: const Duration(seconds: 1),
-///   expect: [10],
+///   expect: () => [10],
 ///   verify: (controller) async {
 ///     // Perform additional verifications.
 ///   },

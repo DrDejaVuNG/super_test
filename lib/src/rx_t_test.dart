@@ -20,9 +20,9 @@ import 'package:test/test.dart' as test;
 /// ```dart
 /// testRxT<int>(
 ///   'RxT test case',
-///   build: RxT<int>(0),
+///   build: () => RxT<int>(0),
 ///   act: (rx) => rx.value = 10,
-///   expect: [10],
+///   expect: () => [10],
 /// );
 /// ```
 ///
@@ -84,12 +84,12 @@ void testRxT<T>(
 ///   setUp: () async {
 ///     // Perform setup operations.
 ///   },
-///   build: RxT<int>(),
+///   build: () => RxT<int>(),
 ///   act: (rx) async {
 ///     // Perform actions on the state.
 ///   },
 ///   wait: const Duration(seconds: 1),
-///   expect: [10],
+///   expect: () => [10],
 ///   verify: (rx) async {
 ///     // Perform additional verifications.
 ///   },

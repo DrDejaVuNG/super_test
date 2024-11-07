@@ -20,9 +20,9 @@ import 'package:test/test.dart' as test;
 /// ```dart
 /// testRxNotifier<int>(
 ///   'RxNotifier test case',
-///   build: RxNotifier<int>(0),
+///   build: () => RxNotifier<int>(0),
 ///   act: (notifier) => notifier.value = 10,
-///   expect: [10],
+///   expect: () => [10],
 /// );
 /// ```
 ///
@@ -89,7 +89,7 @@ void testRxNotifier<S extends RxNotifier<T>, T>(
 ///     // Perform actions on the notifier.
 ///   },
 ///   wait: const Duration(seconds: 1),
-///   expect: [10],
+///   expect: () => [10],
 ///   verify: (notifier) async {
 ///     // Perform additional verifications.
 ///   },
