@@ -59,19 +59,19 @@ import 'package:test/test.dart' as test;
 @isTest
 void testController<S extends SuperController, T>(
   String description, {
-  required S build,
+  required S Function() build,
   required T Function(S controller) state,
   void Function(S controller)? onEnable,
   void Function(S controller)? onAlive,
   void Function(S controller)? onDisable,
   FutureOr<void> Function()? setUp,
-  T? seed,
+  T Function()? seed,
   FutureOr<void> Function(S controller)? act,
   Duration? wait,
   int skip = 0,
-  List<T>? expect,
+  List<T> Function()? expect,
   FutureOr<void> Function(S controller)? verify,
-  Object? errors,
+  Object Function()? errors,
   FutureOr<void> Function()? tearDown,
   dynamic tags,
 }) {
@@ -106,19 +106,19 @@ void testController<S extends SuperController, T>(
 /// executes actions on the controller, waits for a specified duration, disposes of the controller, handles
 /// the disable state, performs verifications, and handles errors.
 Future<void> _controllerTest<S extends SuperController, T>({
-  required S build,
+  required S Function() build,
   required T Function(S controller) state,
   required int skip,
   void Function(S controller)? onEnable,
   void Function(S controller)? onAlive,
   void Function(S controller)? onDisable,
   FutureOr<void> Function()? setUp,
-  T? seed,
+  T Function()? seed,
   FutureOr<void> Function(S controller)? act,
   Duration? wait,
-  List<T>? expect,
+  List<T> Function()? expect,
   FutureOr<void> Function(S controller)? verify,
-  Object? errors,
+  Object Function()? errors,
   FutureOr<void> Function()? tearDown,
 }) async {
   var shallowEquality = false;
@@ -128,7 +128,7 @@ Future<void> _controllerTest<S extends SuperController, T>({
     await runZoneGuarded(() async {
       await setUp?.call();
       final states = <T>[];
-      final controller = build;
+      final controller = build();
 
       onEnable?.call(controller);
 
@@ -139,7 +139,7 @@ Future<void> _controllerTest<S extends SuperController, T>({
       var changes = 0;
 
       if (rx is RxT<T>) {
-        if (seed != null) rx.state = seed;
+        if (seed != null) rx.state = seed();
         rx.addListener(() {
           if (skip == 0 || changes == skip) {
             states.add(rx.state);
@@ -149,7 +149,7 @@ Future<void> _controllerTest<S extends SuperController, T>({
       }
 
       if (rx is RxNotifier<T>) {
-        if (seed != null) rx.state = seed;
+        if (seed != null) rx.state = seed();
         rx.addListener(() {
           if (skip == 0 || changes == skip) {
             states.add(rx.state);
@@ -173,7 +173,7 @@ Future<void> _controllerTest<S extends SuperController, T>({
       onDisable?.call(controller);
 
       if (expect != null) {
-        final dynamic expected = expect;
+        final dynamic expected = expect();
         shallowEquality = '$states' == '$expected';
         try {
           test.expect(states, test.wrapMatcher(expected));
@@ -201,5 +201,5 @@ Alternatively, consider using Matchers in the expect of the testController rathe
     }
   }
 
-  if (errors != null) test.expect(unhandledErrors, test.wrapMatcher(errors));
+  if (errors != null) test.expect(unhandledErrors, test.wrapMatcher(errors()));
 }

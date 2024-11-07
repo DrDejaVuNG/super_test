@@ -3,7 +3,7 @@ import 'package:super_test/super_test.dart';
 
 class CounterNotifier extends RxNotifier<int> {
   @override
-  int watch() {
+  int initial() {
     return 0; // Initial state
   }
 
@@ -15,9 +15,9 @@ class CounterNotifier extends RxNotifier<int> {
 void main() {
   testRxNotifier<CounterNotifier, int>(
     'Outputs [11] when the increment method is called and seed 10',
-    build: CounterNotifier(),
-    seed: 10,
+    build: () => CounterNotifier(),
+    seed: () => 10,
     act: (notifier) => notifier.increment(),
-    expect: const <int>[11],
+    expect: () => const <int>[11],
   );
 }

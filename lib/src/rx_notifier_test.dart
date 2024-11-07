@@ -36,15 +36,15 @@ import 'package:test/test.dart' as test;
 @isTest
 void testRxNotifier<S extends RxNotifier<T>, T>(
   String description, {
-  required S build,
+  required S Function() build,
   FutureOr<void> Function()? setUp,
-  T? seed,
+  T Function()? seed,
   FutureOr<void> Function(S notifier)? act,
   Duration? wait,
   int skip = 0,
-  List<T>? expect,
+  List<T> Function()? expect,
   FutureOr<void> Function(S notifier)? verify,
-  Object? errors,
+  Object Function()? errors,
   FutureOr<void> Function()? tearDown,
   dynamic tags,
 }) {
@@ -108,15 +108,15 @@ void testRxNotifier<S extends RxNotifier<T>, T>(
 /// The [_rxNotifierTest] function is not intended to be used directly but provides the implementation for
 /// the [testRxNotifier] function.
 Future<void> _rxNotifierTest<S extends RxNotifier<T>, T>({
-  required S build,
+  required S Function() build,
   required int skip,
   FutureOr<void> Function()? setUp,
-  T? seed,
+  T Function()? seed,
   FutureOr<void> Function(S notifier)? act,
   Duration? wait,
-  List<T>? expect,
+  List<T> Function()? expect,
   FutureOr<void> Function(S notifier)? verify,
-  Object? errors,
+  Object Function()? errors,
   FutureOr<void> Function()? tearDown,
 }) async {
   var shallowEquality = false;
@@ -126,10 +126,10 @@ Future<void> _rxNotifierTest<S extends RxNotifier<T>, T>({
     await runZoneGuarded(() async {
       await setUp?.call();
       final states = <T>[];
-      final notifier = build;
+      final notifier = build();
       var changes = 0;
       // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
-      if (seed != null) notifier.state = seed;
+      if (seed != null) notifier.state = seed();
       notifier.addListener(() {
         if (skip == 0 || changes == skip) {
           states.add(notifier.state);
@@ -148,7 +148,7 @@ Future<void> _rxNotifierTest<S extends RxNotifier<T>, T>({
       notifier.dispose();
 
       if (expect != null) {
-        final dynamic expected = expect;
+        final dynamic expected = expect();
         shallowEquality = '$states' == '$expected';
         try {
           test.expect(states, test.wrapMatcher(expected));
@@ -176,5 +176,5 @@ Alternatively, consider using Matchers in the expect of the testRxNotifier rathe
     }
   }
 
-  if (errors != null) test.expect(unhandledErrors, test.wrapMatcher(errors));
+  if (errors != null) test.expect(unhandledErrors, test.wrapMatcher(errors()));
 }

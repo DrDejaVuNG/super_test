@@ -36,15 +36,15 @@ import 'package:test/test.dart' as test;
 @isTest
 void testRxT<T>(
   String description, {
-  required RxT<T> build,
+  required RxT<T> Function() build,
   FutureOr<void> Function()? setUp,
-  T? seed,
+  T Function()? seed,
   FutureOr<void> Function(RxT<T> rx)? act,
   Duration? wait,
   int skip = 0,
-  List<T>? expect,
+  List<T> Function()? expect,
   FutureOr<void> Function(RxT<T> rx)? verify,
-  Object? errors,
+  Object Function()? errors,
   FutureOr<void> Function()? tearDown,
   dynamic tags,
 }) {
@@ -108,15 +108,15 @@ void testRxT<T>(
 /// The [_rxtTest] function is not intended to be used directly but provides the implementation for
 /// the [testRxT] function.
 Future<void> _rxtTest<T>({
-  required RxT<T> build,
+  required RxT<T> Function() build,
   required int skip,
   FutureOr<void> Function()? setUp,
-  T? seed,
+  T Function()? seed,
   FutureOr<void> Function(RxT<T> rx)? act,
   Duration? wait,
-  List<T>? expect,
+  List<T> Function()? expect,
   FutureOr<void> Function(RxT<T> rx)? verify,
-  Object? errors,
+  Object Function()? errors,
   FutureOr<void> Function()? tearDown,
 }) async {
   var shallowEquality = false;
@@ -126,10 +126,10 @@ Future<void> _rxtTest<T>({
     await runZoneGuarded(() async {
       await setUp?.call();
       final states = <T>[];
-      final rx = build;
+      final rx = build();
       var changes = 0;
 
-      if (seed != null) rx.state = seed;
+      if (seed != null) rx.state = seed();
       rx.addListener(() {
         if (skip == 0 || changes == skip) {
           states.add(rx.state);
@@ -148,7 +148,7 @@ Future<void> _rxtTest<T>({
       rx.dispose();
 
       if (expect != null) {
-        final dynamic expected = expect;
+        final dynamic expected = expect();
         shallowEquality = '$states' == '$expected';
         try {
           test.expect(states, test.wrapMatcher(expected));
@@ -176,5 +176,5 @@ Alternatively, consider using Matchers in the expect of the testRxT rather than 
     }
   }
 
-  if (errors != null) test.expect(unhandledErrors, test.wrapMatcher(errors));
+  if (errors != null) test.expect(unhandledErrors, test.wrapMatcher(errors()));
 }
