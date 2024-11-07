@@ -134,8 +134,8 @@ Future<void> _controllerTest<S extends SuperController, T>({
 
       RxListener.listen();
       state(controller);
-      final mergeRx = RxListener.listenedRx();
-      final Object rx = mergeRx.children[0]!;
+      final mergeRx = RxListener.listenedRx<T>();
+      final rx = mergeRx.children[0]!;
       var changes = 0;
 
       if (rx is RxT<T>) {
