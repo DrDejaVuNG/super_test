@@ -29,7 +29,7 @@ Example usage:
 ```dart
 testController<MyController, int>(
   'MyController test',
-  build: MyController(),
+  build: MyController.new,
   state: (controller) => controller.myState,
   onEnable: (controller) {
     // Handle the enable state.
@@ -43,12 +43,12 @@ testController<MyController, int>(
   setUp: () {
     // Perform setup operations.
   },
-  seed: 10,
+  seed: () => 10,
   act: (controller) async {
     // Perform actions on the controller.
   },
   wait: const Duration(seconds: 1),
-  expect: [10],
+  expect: () => [10],
   verify: (controller) async {
     // Perform additional verifications.
   },
@@ -75,9 +75,9 @@ Example usage:
 ```dart
 testRxT<int>(
  'RxT test case',
- build: RxT<int>(0),
+ build: () => RxT<int>(0),
  act: (rx) => rx.value = 10,
- expect: [10],
+ expect: () => [10],
 );
 ```
 
@@ -98,9 +98,9 @@ Example usage:
 ```dart
 testRxNotifier<int>(
  'RxNotifier test case',
- build: RxNotifier<int>(0),
+ build: () => RxNotifier<int>(0),
  act: (notifier) => notifier.value = 10,
- expect: [10],
+ expect: () => [10],
 );
 ```
 

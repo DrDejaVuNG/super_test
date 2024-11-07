@@ -1,6 +1,6 @@
 name: super_test
 description: Designed to simplify testing of SuperControllers, RxNotifiers and RxTs.
-version: 1.2.0
+version: 1.2.1
 repository: https://github.com/DrDejaVuNG/super_test
 issue_tracker: https://github.com/DrDejaVuNG/super_test/issues
 # homepage: https://drdejavu.ng
