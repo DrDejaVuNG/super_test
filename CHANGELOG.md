@@ -1,3 +1,7 @@
+## 1.1.2
+
+- Minor optimizations, ugraded super pkg dependency
+
 ## 1.1.0
 
 - Minor corrections
