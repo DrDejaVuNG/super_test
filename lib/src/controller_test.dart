@@ -138,25 +138,13 @@ Future<void> _controllerTest<S extends SuperController, T>({
       final rx = mergeRx.children[0]!;
       var changes = 0;
 
-      if (rx is RxT<T>) {
-        if (seed != null) rx.state = seed();
-        rx.addListener(() {
-          if (skip == 0 || changes == skip) {
-            states.add(rx.state);
-          }
-          changes++;
-        });
-      }
-
-      if (rx is RxNotifier<T>) {
-        if (seed != null) rx.state = seed();
-        rx.addListener(() {
-          if (skip == 0 || changes == skip) {
-            states.add(rx.state);
-          }
-          changes++;
-        });
-      }
+      if (seed != null) rx.state = seed();
+      rx.addListener(() {
+        if (skip == 0 || changes == skip) {
+          states.add(rx.state);
+        }
+        changes++;
+      });
 
       onAlive?.call(controller);
 
